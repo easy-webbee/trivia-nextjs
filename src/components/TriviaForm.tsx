@@ -9,7 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
 import { Question, SelectOption } from "./question.model";
 import {
   triviaCategories,
@@ -17,17 +16,18 @@ import {
   triviaTypes,
 } from "./select-option";
 import { Button } from "./ui/button";
-import { CardQuestion } from "./CardQuestion";
 
-export default function TriviaForm() {
-  const [questions, setQuestions] = useState([]);
+interface Props {
+  onFetchedQuestions: (questions: Question[]) => void;
+}
+
+export default function TriviaForm({ onFetchedQuestions }: Props) {
   const [form, setForm] = useState({
     amount: 10,
     category: "",
     difficulty: "",
     type: "",
   });
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleChange = (e: { target: { name: string; value: string } }) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -36,22 +36,19 @@ export default function TriviaForm() {
     const params = new URLSearchParams(form as any).toString();
     const res = await fetch(`/api?${params}`);
     const data = await res.json();
-    setQuestions(data.data);
-    setCurrentIndex(0);
+    onFetchedQuestions(data.data);
   };
-  const handleNext = () => {
-    setCurrentIndex((prev) => prev + 1);
-  };
+
   return (
-    <div className="p-4">
-      <div className="flex justify-between">
+    <div className="pt-4">
+      <div className="flex flex-wrap gap-4">
         <Input
           className="w-[220px]"
           name="amount"
           type="number"
           onChange={handleChange}
           placeholder="Number of questions (10)"
-          autoComplete="none"
+          autoComplete="off"
         />
         <Select
           onValueChange={(value) => setForm({ ...form, category: value })}
@@ -96,23 +93,11 @@ export default function TriviaForm() {
         <Button
           variant="destructive"
           size="default"
-          className="rounded"
+          className="rounded w-[180px]"
           onClick={fetchTrivia}
         >
-          Start
+          Start Travia
         </Button>
-      </div>
-      {/* Card */}
-
-      <div className="mt-5">
-        {questions.length > 0 && currentIndex < questions.length && (
-          
-          <CardQuestion data={questions[currentIndex]} onNext={handleNext} />
-        )}
-
-        {questions.length > 0 && currentIndex >= questions.length && (
-          <p className="text-xl">You’ve completed the quiz!</p>
-        )}
       </div>
     </div>
   );
