@@ -21,7 +21,12 @@ import { CardQuestion } from "./CardQuestion";
 
 export default function TriviaForm() {
   const [questions, setQuestions] = useState([]);
-  const [form, setForm] = useState({ amount: 10, category: "", difficulty: "", type:"" });
+  const [form, setForm] = useState({
+    amount: 10,
+    category: "",
+    difficulty: "",
+    type: "",
+  });
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleChange = (e: { target: { name: string; value: string } }) =>
@@ -40,68 +45,75 @@ export default function TriviaForm() {
   return (
     <div className="p-4">
       <div className="flex justify-between">
-      <Input
-        className="w-[220px]"
-        name="amount"
-        type="number"
-        onChange={handleChange}
-        placeholder="Number of questions (10)"
-        autoComplete="none"
-      />
-      <Select  onValueChange={(value) => setForm({ ...form, category: value })}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select Category" />
-        </SelectTrigger>
-        <SelectContent >
-          {triviaCategories.map((opt: SelectOption) => (
-            <SelectItem key={opt.value} value={opt.value} >
-              {opt.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <Select onValueChange={(value) => setForm({ ...form, difficulty: value })}>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select Difficulty" />
-        </SelectTrigger>
-        <SelectContent>
-          {triviaDifficulties.map((opt: SelectOption) => (
-            <SelectItem key={opt.value} value={opt.value}>
-              {opt.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <Select onValueChange={(value) => setForm({ ...form, type: value })}> 
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select Type" />
-        </SelectTrigger>
-        <SelectContent>
-          {triviaTypes.map((opt: SelectOption) => (
-            <SelectItem key={opt.value} value={opt.value}>
-              {opt.label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <Button
-        variant="destructive"
-        size="default"
-        className="rounded"
-        onClick={fetchTrivia}
-      >
-        Start
-      </Button>
+        <Input
+          className="w-[220px]"
+          name="amount"
+          type="number"
+          onChange={handleChange}
+          placeholder="Number of questions (10)"
+          autoComplete="none"
+        />
+        <Select
+          onValueChange={(value) => setForm({ ...form, category: value })}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select Category" />
+          </SelectTrigger>
+          <SelectContent>
+            {triviaCategories.map((opt: SelectOption) => (
+              <SelectItem key={opt.value} value={opt.value}>
+                {opt.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select
+          onValueChange={(value) => setForm({ ...form, difficulty: value })}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select Difficulty" />
+          </SelectTrigger>
+          <SelectContent>
+            {triviaDifficulties.map((opt: SelectOption) => (
+              <SelectItem key={opt.value} value={opt.value}>
+                {opt.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select onValueChange={(value) => setForm({ ...form, type: value })}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select Type" />
+          </SelectTrigger>
+          <SelectContent>
+            {triviaTypes.map((opt: SelectOption) => (
+              <SelectItem key={opt.value} value={opt.value}>
+                {opt.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Button
+          variant="destructive"
+          size="default"
+          className="rounded"
+          onClick={fetchTrivia}
+        >
+          Start
+        </Button>
       </div>
       {/* Card */}
 
-      {questions.length > 0 && currentIndex < questions.length && (
-        <CardQuestion data={questions[currentIndex]} onNext={handleNext} />
-      )}
+      <div className="mt-5">
+        {questions.length > 0 && currentIndex < questions.length && (
+          
+          <CardQuestion data={questions[currentIndex]} onNext={handleNext} />
+        )}
 
-      {questions.length > 0 && currentIndex >= questions.length && (
-        <p className="text-xl">You’ve completed the quiz!</p>
-      )}
+        {questions.length > 0 && currentIndex >= questions.length && (
+          <p className="text-xl">You’ve completed the quiz!</p>
+        )}
+      </div>
     </div>
   );
 }
