@@ -23,6 +23,7 @@ export function ScoreDisplay({ score }: ScoreDisplayProps) {
       </CardHeader>
 
       <CardContent className="flex-grow space-y-2 text-4xl font-bold text-center">
+
         {score}
       </CardContent>
 

@@ -12,11 +12,21 @@ import { Question } from "./question.model";
 
 interface TriviaCardProps {
   data: Question;
+  state: {
+    currentQts: number;
+    length: number;
+  };
   onNext: () => void;
   onAnswer: (points: number) => void;
 }
-export function CardQuestion({ data, onNext, onAnswer }: TriviaCardProps) {
-  const { question, correct_answer, incorrect_answers, difficulty ,category} = data;
+export function CardQuestion({
+  data,
+  state,
+  onNext,
+  onAnswer,
+}: TriviaCardProps) {
+  const { question, correct_answer, incorrect_answers, difficulty, category } =
+    data;
 
   // time for difficulty lv
   const difficultyTimerMap = {
@@ -24,7 +34,7 @@ export function CardQuestion({ data, onNext, onAnswer }: TriviaCardProps) {
     medium: 30,
     hard: 45,
   };
-  const maxTime = difficultyTimerMap[difficulty] || 15; 
+  const maxTime = difficultyTimerMap[difficulty] || 15;
   const allAnswers = useMemo(() => {
     return shuffleAnswers([correct_answer, ...incorrect_answers]);
   }, [data]);
@@ -46,7 +56,7 @@ export function CardQuestion({ data, onNext, onAnswer }: TriviaCardProps) {
         if (prev === 1) {
           clearInterval(interval);
           setTimeoutReached(true);
-          onAnswer(0); 
+          onAnswer(0);
         }
         return prev - 1;
       });
@@ -63,7 +73,7 @@ export function CardQuestion({ data, onNext, onAnswer }: TriviaCardProps) {
       onAnswer(points);
     }
   };
-  
+
   const isCorrect = (answer: string) => answer === correct_answer;
   const showFeedback = selectedAnswer !== null || timeoutReached;
 
@@ -84,13 +94,17 @@ export function CardQuestion({ data, onNext, onAnswer }: TriviaCardProps) {
   return (
     <Card className="w-[650px] h-[450px] flex flex-col">
       <CardHeader>
-        <CardTitle dangerouslySetInnerHTML={{ __html:'Category: '+ category }}></CardTitle>
+        <CardTitle
+          dangerouslySetInnerHTML={{ __html: "Category: " + category +" | Level " + difficulty}}
+        ></CardTitle>
         <CardDescription
           className="text-lg font-semibold mb-4"
           dangerouslySetInnerHTML={{ __html: question }}
         />
         <p className="text-right text-sm text-muted-foreground">
-          
+          <span>
+            {state.currentQts} of {state.length}{" "}
+          </span>
           Time left:{" "}
           <span className={timer <= 5 ? "text-red-500 font-bold" : ""}>
             {timer}s
