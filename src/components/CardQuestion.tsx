@@ -9,6 +9,7 @@ import {
   CardFooter,
 } from "./ui/card";
 import { Difficulty, Question } from "./question.model";
+import { CircularTimer } from "./ui/circularTimer";
 
 interface TriviaCardProps {
   data: Question;
@@ -103,15 +104,21 @@ export function CardQuestion({
           className="text-lg font-semibold mb-4"
           dangerouslySetInnerHTML={{ __html: question }}
         />
-        <p className="text-right text-sm text-muted-foreground">
-          <span>
-            {state.currentQts} of {state.length}{" "}
-          </span>
-          Time left:{" "}
-          <span className={timer <= 5 ? "text-red-500 font-bold" : ""}>
-            {timer}s
-          </span>
-        </p>
+        <div className="flex items-center justify-end space-x-2 w-full">
+          <div className="flex items-center space-x-2">
+            {timer === 0 && (
+              <span className="text-red-500 font-bold text-sm whitespace-nowrap">
+                Time's up!
+              </span>
+            )}
+            <CircularTimer timer={timer} maxTime={maxTime} />
+          </div>
+          <p className="text-right text-sm text-muted-foreground">
+            <span>
+            {" "}{state.currentQts} of {state.length}{" "}
+            </span>
+          </p>
+        </div>
       </CardHeader>
 
       <CardContent className="flex-grow space-y-2">
