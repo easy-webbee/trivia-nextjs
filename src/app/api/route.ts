@@ -1,6 +1,7 @@
 // pages/api/fetch/route.ts (for App Router) or fetch.js (Pages Router)
 import { NextResponse } from "next/server";
 import axios from "axios";
+import { Mockdata } from "@/components/select-option";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -20,9 +21,9 @@ export async function GET(req: Request) {
 
     return NextResponse.json({ success: true, data: questions });
   } catch (err: any) {
+    // return mock data incase api 429
     return NextResponse.json(
-      { success: false, error: err.message },
-      { status: 500 }
+      { success: true, data: Mockdata }
     );
   }
 }

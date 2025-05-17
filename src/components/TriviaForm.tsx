@@ -22,18 +22,21 @@ import { CardQuestion } from "./CardQuestion";
 export default function TriviaForm() {
   const [questions, setQuestions] = useState([]);
   const [form, setForm] = useState({ amount: 10, category: "", difficulty: "", type:"" });
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleChange = (e: { target: { name: any; value: any } }) =>
+  const handleChange = (e: { target: { name: string; value: string } }) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const fetchTrivia = async () => {
     const params = new URLSearchParams(form as any).toString();
     const res = await fetch(`/api?${params}`);
     const data = await res.json();
-    console.log(data.data)
     setQuestions(data.data);
+    setCurrentIndex(0);
   };
-
+  const handleNext = () => {
+    setCurrentIndex((prev) => prev + 1);
+  };
   return (
     <div className="p-4">
       <div className="flex justify-between">
@@ -91,11 +94,14 @@ export default function TriviaForm() {
       </Button>
       </div>
       {/* Card */}
-      <ul className="p-4">
-        {questions.map((q: any, i) => (
-          <CardQuestion  key={i} data={q}></CardQuestion>
-        ))}
-      </ul>
+
+      {questions.length > 0 && currentIndex < questions.length && (
+        <CardQuestion data={questions[currentIndex]} onNext={handleNext} />
+      )}
+
+      {questions.length > 0 && currentIndex >= questions.length && (
+        <p className="text-xl">You’ve completed the quiz!</p>
+      )}
     </div>
   );
 }
