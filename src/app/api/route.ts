@@ -1,0 +1,28 @@
+// pages/api/fetch/route.ts (for App Router) or fetch.js (Pages Router)
+import { NextResponse } from "next/server";
+import axios from "axios";
+
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const amount = searchParams.get("amount") || "10";
+  const category = searchParams.get("category");
+  const difficulty = searchParams.get("difficulty");
+  const type = searchParams.get("type");
+
+  let url = `https://opentdb.com/api.php?amount=${amount}`;
+  if (category) url += `&category=${category}`;
+  if (difficulty) url += `&difficulty=${difficulty}`;
+  if (type) url += `&type=${type}`;
+  // url = 'https://opentdb.com/api.php?amount=10'
+  try {
+    const res = await axios.get(url);
+    const questions = res.data.results;
+
+    return NextResponse.json({ success: true, data: questions });
+  } catch (err: any) {
+    return NextResponse.json(
+      { success: false, error: err.message },
+      { status: 500 }
+    );
+  }
+}
