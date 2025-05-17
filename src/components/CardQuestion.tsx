@@ -16,20 +16,26 @@ interface TriviaCardProps {
   onAnswer: (points: number) => void;
 }
 export function CardQuestion({ data, onNext, onAnswer }: TriviaCardProps) {
-  const { question, correct_answer, incorrect_answers } = data;
+  const { question, correct_answer, incorrect_answers, difficulty ,category} = data;
 
+  // time for difficulty lv
+  const difficultyTimerMap = {
+    easy: 15,
+    medium: 30,
+    hard: 45,
+  };
+  const maxTime = difficultyTimerMap[difficulty] || 15; 
   const allAnswers = useMemo(() => {
     return shuffleAnswers([correct_answer, ...incorrect_answers]);
   }, [data]);
 
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [timer, setTimer] = useState(15);
   const [timeoutReached, setTimeoutReached] = useState(false);
-
+  const [timer, setTimer] = useState(maxTime);
   useEffect(() => {
     setSelectedAnswer(null);
     setTimeoutReached(false);
-    setTimer(15);
+    setTimer(maxTime);
   }, [data]);
 
   useEffect(() => {
@@ -53,11 +59,11 @@ export function CardQuestion({ data, onNext, onAnswer }: TriviaCardProps) {
     if (!selectedAnswer && !timeoutReached) {
       setSelectedAnswer(answer);
       const isCorrect = answer === correct_answer;
-      console.log(isCorrect);
-      onAnswer(isCorrect ? 10 : 0);
+      const points = isCorrect ? 10 * timer : 0;
+      onAnswer(points);
     }
   };
-
+  
   const isCorrect = (answer: string) => answer === correct_answer;
   const showFeedback = selectedAnswer !== null || timeoutReached;
 
@@ -78,12 +84,13 @@ export function CardQuestion({ data, onNext, onAnswer }: TriviaCardProps) {
   return (
     <Card className="w-[650px] h-[450px] flex flex-col">
       <CardHeader>
-        <CardTitle>Question</CardTitle>
+        <CardTitle dangerouslySetInnerHTML={{ __html:'Category: '+ category }}></CardTitle>
         <CardDescription
           className="text-lg font-semibold mb-4"
           dangerouslySetInnerHTML={{ __html: question }}
         />
         <p className="text-right text-sm text-muted-foreground">
+          
           Time left:{" "}
           <span className={timer <= 5 ? "text-red-500 font-bold" : ""}>
             {timer}s

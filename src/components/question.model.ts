@@ -5,7 +5,7 @@ export interface DataQuestions {
 
 export interface Question {
   type: string;
-  difficulty: string;
+  difficulty: "easy" | "medium" | "hard";
   category: string;
   question: string;
   correct_answer: string;

@@ -18,12 +18,12 @@ export async function GET(req: Request) {
   try {
     const res = await axios.get(url);
     const questions = res.data.results;
-
-    return NextResponse.json({ success: true, data: questions });
+    return NextResponse.json({
+      success: true,
+      data: questions.length > 0 ? questions : Mockdata,
+    });
   } catch (err: any) {
     // return mock data incase api 429
-    return NextResponse.json(
-      { success: true, data: Mockdata }
-    );
+    return NextResponse.json({ success: true, data: Mockdata });
   }
 }
