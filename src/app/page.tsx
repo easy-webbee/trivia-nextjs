@@ -16,11 +16,10 @@ export default function Home() {
   const [score, setScore] = useState(0);
 
   const handleAnswer = (points: number) => {
-    console.log(points)
+    console.log(points);
     setScore((prev) => prev + points);
-  
   };
-  
+
   const handleFetchedQuestions = (data: Question[]) => {
     setQuestions(data);
     setCurrentIndex(0);
@@ -34,18 +33,17 @@ export default function Home() {
       <div className="mt-5 flex justify-around">
         <div>
           {questions.length > 0 && currentIndex < questions.length && (
-            <CardQuestion data={questions[currentIndex]} onNext={handleNext} onAnswer={handleAnswer}/>
+            <CardQuestion
+              data={questions[currentIndex]}
+              onNext={handleNext}
+              onAnswer={handleAnswer}
+            />
           )}
           {questions.length > 0 && currentIndex >= questions.length && (
             <p className="text-xl">You’ve completed the quiz!</p>
           )}
         </div>
-        <div>
-          {questions.length > 0 && currentIndex < questions.length && (
-          <ScoreDisplay/>
-          )}
-        </div>
-
+        <div>{questions.length > 0 && <ScoreDisplay score={score} />}</div>
       </div>
     </div>
   );

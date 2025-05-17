@@ -1,4 +1,4 @@
-
+// Score.tsx
 import {
   Card,
   CardHeader,
@@ -7,29 +7,28 @@ import {
   CardContent,
   CardFooter,
 } from "./ui/card";
-import { Question } from "./question.model";
 
+interface ScoreDisplayProps {
+  score: number;
+}
 
-export function ScoreDisplay() {
-
+export function ScoreDisplay({ score }: ScoreDisplayProps) {
   return (
     <Card className="w-[350px] h-[450px] flex flex-col">
       <CardHeader>
         <CardTitle>Scores</CardTitle>
-        <CardDescription className="text-lg font-semibold mb-4"
-        />
-        <p className="text-right text-sm text-muted-foreground">
-        </p>
+        <CardDescription className="text-lg font-semibold mb-4">
+          Points earned so far
+        </CardDescription>
       </CardHeader>
 
-      <CardContent className="flex-grow space-y-2">
-
+      <CardContent className="flex-grow space-y-2 text-4xl font-bold text-center">
+        {score}
       </CardContent>
 
-      <CardFooter className="flex justify-end mt-auto">
-
+      <CardFooter className="flex justify-center text-muted-foreground">
+        Keep it up!
       </CardFooter>
     </Card>
   );
 }
-
