@@ -8,7 +8,7 @@ import {
   CardContent,
   CardFooter,
 } from "./ui/card";
-import { Question } from "./question.model";
+import { Difficulty, Question } from "./question.model";
 
 interface TriviaCardProps {
   data: Question;
@@ -16,8 +16,8 @@ interface TriviaCardProps {
     currentQts: number;
     length: number;
   };
-  onNext: () => void;
-  onAnswer: (points: number) => void;
+  onNext: (difficulty: Difficulty) => void;
+  onAnswer: (points: number, difficulty: Difficulty) => void;
 }
 export function CardQuestion({
   data,
@@ -56,7 +56,7 @@ export function CardQuestion({
         if (prev === 1) {
           clearInterval(interval);
           setTimeoutReached(true);
-          onAnswer(0);
+          onAnswer(0, difficulty);
         }
         return prev - 1;
       });
@@ -70,7 +70,7 @@ export function CardQuestion({
       setSelectedAnswer(answer);
       const isCorrect = answer === correct_answer;
       const points = isCorrect ? 10 * timer : 0;
-      onAnswer(points);
+      onAnswer(points, difficulty);
     }
   };
 
@@ -95,7 +95,9 @@ export function CardQuestion({
     <Card className="w-[650px] h-[450px] flex flex-col">
       <CardHeader>
         <CardTitle
-          dangerouslySetInnerHTML={{ __html: "Category: " + category +" | Level " + difficulty}}
+          dangerouslySetInnerHTML={{
+            __html: "Category: " + category + " | Level " + difficulty,
+          }}
         ></CardTitle>
         <CardDescription
           className="text-lg font-semibold mb-4"
@@ -126,7 +128,7 @@ export function CardQuestion({
       </CardContent>
 
       <CardFooter className="flex justify-end mt-auto">
-        <Button onClick={onNext}>Next</Button>
+        <Button onClick={() => onNext(difficulty)}>Next</Button>
       </CardFooter>
     </Card>
   );
