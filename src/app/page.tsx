@@ -66,29 +66,30 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <div className="mx-auto w-full max-w-7xl p-4 flex-grow">
         <Header />
-        <TriviaForm onFetchedQuestions={handleFetchedQuestions} />
-
-        <div className="mt-5 gap-4 flex justify-center">
-          <div>
-            {questions.length > 0 && currentIndex < questions.length && (
-              <CardQuestion
-                data={questions[currentIndex]}
-                state={{
-                  currentQts: 1 + currentIndex,
-                  length: questions.length,
-                }}
-                onNext={handleNext}
-                onAnswer={handleAnswer}
-              />
-            )}
+        <main>
+          <TriviaForm onFetchedQuestions={handleFetchedQuestions} />
+          <div className="mt-5 gap-4 flex justify-center">
+            <div>
+              {questions.length > 0 && currentIndex < questions.length && (
+                <CardQuestion
+                  data={questions[currentIndex]}
+                  state={{
+                    currentQts: 1 + currentIndex,
+                    length: questions.length,
+                  }}
+                  onNext={handleNext}
+                  onAnswer={handleAnswer}
+                />
+              )}
+            </div>
+            <div>
+              {isQuizComplete && <Confetti width={width} height={height} />}
+              {questions.length > 0 && (
+                <ScoreDisplay score={score} statitic={statitic} />
+              )}
+            </div>
           </div>
-          <div>
-            {isQuizComplete && <Confetti width={width} height={height} />}
-            {questions.length > 0 && (
-              <ScoreDisplay score={score} statitic={statitic} />
-            )}
-          </div>
-        </div>
+        </main>
       </div>
       <Footer />
     </div>

@@ -66,7 +66,7 @@ export default function TriviaForm({ onFetchedQuestions }: Props) {
           <Select
             onValueChange={(value) => setForm({ ...form, category: value })}
           >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[180px]" aria-label="Select Category">
               <SelectValue placeholder="Select Category" />
             </SelectTrigger>
             <SelectContent>
@@ -77,10 +77,11 @@ export default function TriviaForm({ onFetchedQuestions }: Props) {
               ))}
             </SelectContent>
           </Select>
+
           <Select
             onValueChange={(value) => setForm({ ...form, difficulty: value })}
           >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[180px]" aria-label="Select Difficulty">
               <SelectValue placeholder="Select Difficulty" />
             </SelectTrigger>
             <SelectContent>
@@ -91,8 +92,9 @@ export default function TriviaForm({ onFetchedQuestions }: Props) {
               ))}
             </SelectContent>
           </Select>
+
           <Select onValueChange={(value) => setForm({ ...form, type: value })}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[180px]" aria-label="Select Type">
               <SelectValue placeholder="Select Type" />
             </SelectTrigger>
             <SelectContent>
@@ -103,6 +105,7 @@ export default function TriviaForm({ onFetchedQuestions }: Props) {
               ))}
             </SelectContent>
           </Select>
+
           <Button
             variant="destructive"
             size="default"
