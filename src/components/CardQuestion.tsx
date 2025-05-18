@@ -82,11 +82,11 @@ export function CardQuestion({
     if (!showFeedback) return "w-full justify-start";
 
     if (isCorrect(answer)) {
-      return `w-full justify-start bg-green-500 text-white dark:bg-green-600`;
+      return "w-full justify-start bg-green-500 text-white dark:bg-green-600";
     }
 
     if (selectedAnswer === answer && !isCorrect(answer)) {
-      return `w-full justify-start bg-red-500 text-white dark:bg-red-600`;
+      return "w-full justify-start bg-red-500 text-white dark:bg-red-600";
     }
 
     return "w-full justify-start opacity-50";

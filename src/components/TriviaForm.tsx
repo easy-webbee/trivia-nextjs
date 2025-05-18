@@ -38,7 +38,12 @@ export default function TriviaForm({ onFetchedQuestions , setLoading}: Props) {
   const fetchTrivia = async () => {
     setLoading(true);
     try {
-      const params = new URLSearchParams(form as any).toString();
+      const params = new URLSearchParams({
+        amount: form.amount.toString(),
+        category: form.category,
+        difficulty: form.difficulty,
+        type: form.type,
+      }).toString();
       const res = await fetch(`/api?${params}`);
       const data = await res.json();
       onFetchedQuestions(data.data);

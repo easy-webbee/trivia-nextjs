@@ -14,7 +14,7 @@ export async function GET(req: Request) {
   if (category) url += `&category=${category}`;
   if (difficulty) url += `&difficulty=${difficulty}`;
   if (type) url += `&type=${type}`;
-  // url = 'https://opentdb.com/api.php?amount=10'
+ 
   try {
     const res = await axios.get(url);
     const questions = res.data.results;
@@ -22,7 +22,7 @@ export async function GET(req: Request) {
       success: true,
       data: questions.length > 0 ? questions : Mockdata,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     // return mock data incase api 429
     return NextResponse.json({ success: true, data: Mockdata });
   }
