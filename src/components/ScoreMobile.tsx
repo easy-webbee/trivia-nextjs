@@ -1,12 +1,9 @@
 "use client";
-import { Statistic } from "../model/trivia.model";
 import {
   Card,
   CardHeader,
   CardTitle,
-  CardDescription,
   CardContent,
-  CardFooter,
 } from "./ui/card";
 import AnimatedNumbers from "react-animated-numbers";
 
