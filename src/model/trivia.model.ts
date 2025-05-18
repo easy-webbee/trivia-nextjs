@@ -13,5 +13,5 @@ export interface Question {
 
 export interface SelectOption {
   label: string;
-  value: string ;
+  value: string;
 }
