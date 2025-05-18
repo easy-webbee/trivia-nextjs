@@ -21,7 +21,7 @@ interface Props {
   setLoading: (loading: boolean) => void;
 }
 
-export default function TriviaForm({ onFetchedQuestions , setLoading}: Props) {
+export default function TriviaForm({ onFetchedQuestions, setLoading }: Props) {
   const [showWelcome, setShowWelcome] = useState(true);
 
   const [form, setForm] = useState({
@@ -31,9 +31,11 @@ export default function TriviaForm({ onFetchedQuestions , setLoading}: Props) {
     type: "",
   });
 
+  // Handle input changes by updating form state
   const handleChange = (e: { target: { name: string; value: string } }) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
+  // Fetch trivia questions from API based on form state
   const fetchTrivia = async () => {
     setLoading(true);
     try {

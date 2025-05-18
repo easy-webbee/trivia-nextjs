@@ -20,6 +20,7 @@ interface TriviaCardProps {
   onNext: (difficulty: Difficulty) => void;
   onAnswer: (points: number, difficulty: Difficulty) => void;
 }
+
 export function CardQuestion({
   data,
   state,
@@ -36,14 +37,17 @@ export function CardQuestion({
     hard: 45,
   };
   const maxTime = difficultyTimerMap[difficulty] || 15;
-  const allAnswers = useMemo(() => {
-    return shuffleAnswers([correct_answer, ...incorrect_answers]);
-  }, [correct_answer, incorrect_answers]);
 
+  // State variables for user answer selection, timeout, timer countdown, and points gained
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [timeoutReached, setTimeoutReached] = useState(false);
   const [timer, setTimer] = useState(maxTime);
   const [showPoints, setshowPoints] = useState(0);
+
+  // Shuffle answers to randomize order each time question changes
+  const allAnswers = useMemo(() => {
+    return shuffleAnswers([correct_answer, ...incorrect_answers]);
+  }, [correct_answer, incorrect_answers]);
 
   // reset
   useEffect(() => {
@@ -53,6 +57,7 @@ export function CardQuestion({
     setshowPoints(0);
   }, [data, maxTime]);
 
+  // Timer countdown logic:
   useEffect(() => {
     if (selectedAnswer || timeoutReached) return;
     const interval = setInterval(() => {
@@ -69,6 +74,7 @@ export function CardQuestion({
     return () => clearInterval(interval);
   }, [selectedAnswer, timeoutReached, difficulty, onAnswer]);
 
+  // Handles when user selects an answer
   const handleSelect = (answer: string) => {
     if (!selectedAnswer && !timeoutReached) {
       setSelectedAnswer(answer);
@@ -82,6 +88,7 @@ export function CardQuestion({
   const isCorrect = (answer: string) => answer === correct_answer;
   const showFeedback = selectedAnswer !== null || timeoutReached;
 
+  // Determine button styles base on feedback and correctness
   const getButtonClass = (answer: string) => {
     if (!showFeedback) return "w-full justify-start";
 
@@ -151,6 +158,7 @@ export function CardQuestion({
   );
 }
 
+//shuffle answers randomly
 function shuffleAnswers(answers: string[]): string[] {
   return answers
     .map((value) => ({ value, sort: Math.random() }))
