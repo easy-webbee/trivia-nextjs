@@ -17,7 +17,7 @@ interface ScoreDisplayProps {
 
 export function ScoreDisplay({ score, statitic }: ScoreDisplayProps) {
   return (
-    <Card className="w-[350px] h-[450px] flex flex-col">
+    <Card className="w-[350px] max-[1030px]:w-[300px] max-[740px]:w-[250px] h-[450px] max-[900px]:h-[500px] flex flex-col">
       <CardHeader>
         <CardTitle>Scores</CardTitle>
         <CardDescription className="text-lg font-semibold mb-4">
@@ -25,8 +25,8 @@ export function ScoreDisplay({ score, statitic }: ScoreDisplayProps) {
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="flex-grow space-y-2 text-4xl font-bold text-center">
-        <div className="flex justify-center">
+      <CardContent className="flex-grow space-y-2 text-4xl font-bold text-center ">
+        <div className="flex justify-center ">
           <AnimatedNumbers
             key={score}
             includeComma

@@ -9,6 +9,7 @@ import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 import { Footer } from "@/components/Footer";
 import { Spinner } from "@/components/spinner/Spinner";
+import { ScoreMobileDisplay } from "@/components/ScoreMobile";
 
 export default function Home() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -77,8 +78,8 @@ export default function Home() {
               <Spinner />
             </div>
           ) : (
-            <div className="mt-5 gap-4 flex justify-center">
-              <div>
+            <div className="mt-5 gap-4 flex justify-center flex-col min-[700px]:flex-row items-center ">
+              <div className="order-2 min-[700px]:order-1">
                 {questions.length > 0 && currentIndex < questions.length && (
                   <CardQuestion
                     data={questions[currentIndex]}
@@ -91,11 +92,23 @@ export default function Home() {
                   />
                 )}
               </div>
-              <div>
+              <div className="order-1 min-[700px]:order-2">
                 {isQuizComplete && <Confetti width={width} height={height} />}
-                {questions.length > 0 && (
-                  <ScoreDisplay score={score} statitic={statitic} />
-                )}
+                <div className="max-[700px]:hidden">
+                  {questions.length > 0 && (
+                    <ScoreDisplay score={score} statitic={statitic} />
+                  )}
+                </div>
+                <div className="hidden max-[700px]:block">
+                  {questions.length > 0 &&  isQuizComplete &&(
+                    <ScoreDisplay score={score} statitic={statitic} />
+                  )}
+                </div>
+                <div className="min-[700px]:hidden">
+                  {questions.length > 0 &&  !isQuizComplete && (
+                    <ScoreMobileDisplay score={score} statitic={statitic} />
+                  )}
+                </div>
               </div>
             </div>
           )}

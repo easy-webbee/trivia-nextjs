@@ -97,7 +97,7 @@ export function CardQuestion({
   };
 
   return (
-    <Card className="w-[650px] h-[450px] flex flex-col">
+    <Card className="w-[650px] max-[1030px]:w-[500px] max-[900px]:w-[400px] h-[450px] max-[900px]:h-[500px] max-[700px]:w-[450px] max-[470px]:w-[300px] flex flex-col overflow-auto">
       <CardHeader>
         <CardTitle
           dangerouslySetInnerHTML={{
