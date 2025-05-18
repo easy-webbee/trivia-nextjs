@@ -47,7 +47,7 @@ export function CardQuestion({
     setSelectedAnswer(null);
     setTimeoutReached(false);
     setTimer(maxTime);
-  }, [maxTime]);
+  }, [data, maxTime]);
 
   useEffect(() => {
     if (selectedAnswer || timeoutReached) return;
@@ -64,7 +64,7 @@ export function CardQuestion({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [difficulty, onAnswer]);
+  }, [selectedAnswer, timeoutReached, difficulty, onAnswer]);
 
   const handleSelect = (answer: string) => {
     if (!selectedAnswer && !timeoutReached) {
@@ -115,7 +115,8 @@ export function CardQuestion({
           </div>
           <p className="text-right text-sm text-muted-foreground">
             <span>
-            {" "}{state.currentQts} of {state.length}{" "}
+              {" "}
+              {state.currentQts} of {state.length}{" "}
             </span>
           </p>
         </div>
