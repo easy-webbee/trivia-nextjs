@@ -10,7 +10,7 @@ import {
 } from "./ui/card";
 import { Difficulty, Question } from "../model/trivia.model";
 import { CircularTimer } from "./ui/circularTimer";
-
+import { decode } from "he";
 interface TriviaCardProps {
   data: Question;
   state: {
@@ -106,15 +106,12 @@ export function CardQuestion({
   return (
     <Card className="w-[650px] max-[1030px]:w-[500px] max-[900px]:w-[400px] h-[450px] max-[900px]:h-[500px] max-[700px]:w-[450px] max-[470px]:w-[300px] flex flex-col overflow-auto">
       <CardHeader>
-        <CardTitle
-          dangerouslySetInnerHTML={{
-            __html: "Category: " + category + " | Level " + difficulty,
-          }}
-        ></CardTitle>
-        <CardDescription
-          className="text-lg font-semibold mb-4"
-          dangerouslySetInnerHTML={{ __html: question }}
-        />
+        <CardTitle>
+          Category: {decode(category)} | Level {difficulty} | Time Allow{" "}
+          {maxTime}s
+        </CardTitle>
+
+        <CardDescription>{decode(question)}</CardDescription>
         <div className="flex items-center justify-end space-x-2 w-full">
           <div className="flex items-center space-x-2">
             {timer === 0 && (
@@ -146,8 +143,9 @@ export function CardQuestion({
             className={getButtonClass(answer)}
             onClick={() => handleSelect(answer)}
             disabled={!!selectedAnswer || timeoutReached}
-            dangerouslySetInnerHTML={{ __html: answer }}
-          />
+          >
+            {decode(answer)}
+          </Button>
         ))}
       </CardContent>
 
