@@ -1,6 +1,6 @@
-import { Question } from "@/model/trivia.model";
+import { Question, SelectOption } from "@/model/trivia.model";
 
-export const triviaCategories = [
+export const triviaCategories: SelectOption[] = [
   { value: "any", label: "Any Category" },
   { value: "9", label: "General Knowledge" },
   { value: "10", label: "Entertainment: Books" },
@@ -28,14 +28,14 @@ export const triviaCategories = [
   { value: "32", label: "Entertainment: Cartoon & Animations" },
 ];
 
-export const triviaDifficulties = [
+export const triviaDifficulties: SelectOption[] = [
   { value: "any", label: "Any Difficulty" },
   { value: "easy", label: "Easy" },
   { value: "medium", label: "Medium" },
   { value: "hard", label: "Hard" },
 ];
 
-export const triviaTypes = [
+export const triviaTypes: SelectOption[] = [
   { value: "any", label: "Any Type" },
   { value: "multiple", label: "Multiple Choice" },
   { value: "boolean", label: "True / False" },
