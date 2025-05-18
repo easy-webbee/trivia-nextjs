@@ -19,9 +19,10 @@ import { Button } from "./ui/button";
 
 interface Props {
   onFetchedQuestions: (questions: Question[]) => void;
+  setLoading: (loading: boolean) => void;
 }
 
-export default function TriviaForm({ onFetchedQuestions }: Props) {
+export default function TriviaForm({ onFetchedQuestions , setLoading}: Props) {
   const [showWelcome, setShowWelcome] = useState(true);
 
   const [form, setForm] = useState({
@@ -35,11 +36,16 @@ export default function TriviaForm({ onFetchedQuestions }: Props) {
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const fetchTrivia = async () => {
-    const params = new URLSearchParams(form as any).toString();
-    const res = await fetch(`/api?${params}`);
-    const data = await res.json();
-    onFetchedQuestions(data.data);
-    setShowWelcome(false);
+    setLoading(true);
+    try {
+      const params = new URLSearchParams(form as any).toString();
+      const res = await fetch(`/api?${params}`);
+      const data = await res.json();
+      onFetchedQuestions(data.data);
+      setShowWelcome(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
