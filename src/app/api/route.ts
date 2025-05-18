@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
-import { Mockdata } from "@/model/select-option";
+import { Mockdata } from "@/data/mockdata";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);

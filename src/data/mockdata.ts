@@ -1,3 +1,5 @@
+import { Question } from "@/model/trivia.model";
+
 export const triviaCategories = [
   { value: "any", label: "Any Category" },
   { value: "9", label: "General Knowledge" },
@@ -39,7 +41,7 @@ export const triviaTypes = [
   { value: "boolean", label: "True / False" },
 ];
 
-export const Mockdata = [
+export const Mockdata: Question[] = [
   {
     type: "multiple",
     difficulty: "medium",

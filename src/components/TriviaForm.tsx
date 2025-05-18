@@ -14,7 +14,7 @@ import {
   triviaCategories,
   triviaDifficulties,
   triviaTypes,
-} from "../model/select-option";
+} from "../data/mockdata";
 import { Button } from "./ui/button";
 
 interface Props {
