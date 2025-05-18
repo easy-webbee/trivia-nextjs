@@ -88,37 +88,41 @@ export default function Home() {
       <div className="mx-auto w-full max-w-7xl p-4 flex-grow">
         <Header />
 
-        <main>
+        <main className="flex justify-center flex-col">
           {/* Form to fetch trivia questions */}
-          <TriviaForm
-            onFetchedQuestions={handleFetchedQuestions}
-            setLoading={setLoading}
-          />
+          <div className="order-2 min-[700px]:order-1">
+            <TriviaForm
+              onFetchedQuestions={handleFetchedQuestions}
+              setLoading={setLoading}
+            />
+          </div>
           {/* Show spinner while loading */}
           {loading ? (
             <div className="flex justify-center items-center min-h-[200px]">
               <Spinner />
             </div>
           ) : (
-            <div className="mt-5 gap-4 flex justify-center flex-col min-[700px]:flex-row items-center ">
-              <div className="order-2 min-[700px]:order-1">
-                {questions.length > 0 && currentIndex < questions.length && (
-                  <CardQuestion
-                    key={currentIndex}
-                    data={questions[currentIndex]}
-                    state={{
-                      currentQts: 1 + currentIndex,
-                      length: questions.length,
-                    }}
-                    onNext={handleNext}
-                    onAnswer={handleAnswer}
-                  />
-                )}
-              </div>
-              {/* Score display and confetti */}
-              <div className="order-1 min-[700px]:order-2">
-                {isQuizComplete && <Confetti width={width} height={height} />}
-                {questions.length > 0 && renderScoreDisplay()}
+            <div className="order-1 min-[700px]:order-2">
+              <div className="mt-5 gap-4 flex justify-center flex-col min-[700px]:flex-row items-center ">
+                <div className="order-2 min-[700px]:order-1">
+                  {questions.length > 0 && currentIndex < questions.length && (
+                    <CardQuestion
+                      key={currentIndex}
+                      data={questions[currentIndex]}
+                      state={{
+                        currentQts: 1 + currentIndex,
+                        length: questions.length,
+                      }}
+                      onNext={handleNext}
+                      onAnswer={handleAnswer}
+                    />
+                  )}
+                </div>
+                {/* Score display and confetti */}
+                <div className="order-1 min-[700px]:order-2">
+                  {isQuizComplete && <Confetti width={width} height={height} />}
+                  {questions.length > 0 && renderScoreDisplay()}
+                </div>
               </div>
             </div>
           )}
