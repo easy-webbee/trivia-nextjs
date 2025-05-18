@@ -15,7 +15,16 @@ import {
   triviaTypes,
 } from "../data/mockdata";
 import { Button } from "./ui/button";
-
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 interface Props {
   onFetchedQuestions: (questions: Question[]) => void;
   setLoading: (loading: boolean) => void;
@@ -53,8 +62,108 @@ export default function TriviaForm({ onFetchedQuestions, setLoading }: Props) {
       setLoading(false);
     }
   };
+  // question parama
+  const questionSelection = (
+    <>
+      <Input
+        className="w-[220px]"
+        name="amount"
+        type="number"
+        onChange={handleChange}
+        placeholder="Number of questions (10)"
+        autoComplete="off"
+      />
+      <Select onValueChange={(value) => setForm({ ...form, category: value })}>
+        <SelectTrigger className="w-[220px]" aria-label="Select Category">
+          <SelectValue placeholder="Select Category" />
+        </SelectTrigger>
+        <SelectContent>
+          {triviaCategories.map((opt: SelectOption) => (
+            <SelectItem key={opt.value} value={opt.value}>
+              {opt.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
-  return (
+      <Select
+        onValueChange={(value) => setForm({ ...form, difficulty: value })}
+      >
+        <SelectTrigger className="w-[220px]" aria-label="Select Difficulty">
+          <SelectValue placeholder="Select Difficulty" />
+        </SelectTrigger>
+        <SelectContent>
+          {triviaDifficulties.map((opt: SelectOption) => (
+            <SelectItem key={opt.value} value={opt.value}>
+              {opt.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+
+      <Select onValueChange={(value) => setForm({ ...form, type: value })}>
+        <SelectTrigger className="w-[220px]" aria-label="Select Type">
+          <SelectValue placeholder="Select Type" />
+        </SelectTrigger>
+        <SelectContent>
+          {triviaTypes.map((opt: SelectOption) => (
+            <SelectItem key={opt.value} value={opt.value}>
+              {opt.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </>
+  );
+  const btnStart = (
+    <Button
+      variant="destructive"
+      size="default"
+      className="rounded w-[220px] font-medium"
+      onClick={fetchTrivia}
+    >
+      Start Travia
+    </Button>
+  );
+  const desktopView = (
+    <div className="flex flex-wrap gap-4 justify-center">
+      {questionSelection}
+      {btnStart}
+    </div>
+  );
+  const mobileDialog = (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="destructive" className="rounded w-[220px] font-medium">
+          Start Travia
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="text-destructive font-medium">
+            Start Trivia
+          </DialogTitle>
+          <DialogDescription>
+            Choose your trivia preferences before starting the game.
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="flex flex-wrap gap-4 justify-center">
+          {questionSelection}
+        </div>
+
+        <DialogFooter>
+          <DialogClose asChild>
+            <div className="flex flex-wrap gap-4 justify-center">
+              {btnStart}
+            </div>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+  const respondsiveLayout = (
     <div className="flex flex-col items-center justify-center gap-6 text-center">
       {showWelcome && (
         <div className="flex flex-col items-center justify-center gap-6 text-center min-h-[200px]">
@@ -65,69 +174,9 @@ export default function TriviaForm({ onFetchedQuestions, setLoading }: Props) {
           </p>
         </div>
       )}
-      <div className="pt-4">
-        <div className="flex flex-wrap gap-4 justify-center">
-          <Input
-            className="w-[220px]"
-            name="amount"
-            type="number"
-            onChange={handleChange}
-            placeholder="Number of questions (10)"
-            autoComplete="off"
-          />
-          <Select
-            onValueChange={(value) => setForm({ ...form, category: value })}
-          >
-            <SelectTrigger className="w-[180px]" aria-label="Select Category">
-              <SelectValue placeholder="Select Category" />
-            </SelectTrigger>
-            <SelectContent>
-              {triviaCategories.map((opt: SelectOption) => (
-                <SelectItem key={opt.value} value={opt.value}>
-                  {opt.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <Select
-            onValueChange={(value) => setForm({ ...form, difficulty: value })}
-          >
-            <SelectTrigger className="w-[180px]" aria-label="Select Difficulty">
-              <SelectValue placeholder="Select Difficulty" />
-            </SelectTrigger>
-            <SelectContent>
-              {triviaDifficulties.map((opt: SelectOption) => (
-                <SelectItem key={opt.value} value={opt.value}>
-                  {opt.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <Select onValueChange={(value) => setForm({ ...form, type: value })}>
-            <SelectTrigger className="w-[180px]" aria-label="Select Type">
-              <SelectValue placeholder="Select Type" />
-            </SelectTrigger>
-            <SelectContent>
-              {triviaTypes.map((opt: SelectOption) => (
-                <SelectItem key={opt.value} value={opt.value}>
-                  {opt.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          <Button
-            variant="destructive"
-            size="default"
-            className="rounded w-[180px] font-medium"
-            onClick={fetchTrivia}
-          >
-            Start Travia
-          </Button>
-        </div>
-      </div>
+      <div className="p-4 hidden min-[700px]:block">{desktopView}</div>
+      <div className="p-4 block min-[700px]:hidden">{mobileDialog}</div>
     </div>
   );
+  return <>{respondsiveLayout}</>;
 }
