@@ -24,8 +24,8 @@ export default function Home() {
     medium: { correct: 0, total: 0 },
     hard: { correct: 0, total: 0 },
   });
-
-  // Get screen size for responsive behavior
+  const [quizStarted, setQuizStarted] = useState(false);
+  // Get screen size for responsive behavior and confetti
   const { width, height } = useWindowSize();
 
   // next question and increment the total count for that difficulty
@@ -60,6 +60,7 @@ export default function Home() {
     setLoading(false);
     setQuestions(data);
     setCurrentIndex(0);
+    setQuizStarted(true);
     // option reset or not
     // setScore(0);
     // setStatitic({
@@ -92,17 +93,18 @@ export default function Home() {
           {/* Form to fetch trivia questions */}
           <div className="order-2 min-[700px]:order-1">
             <TriviaForm
+              quizStarted={quizStarted}
               onFetchedQuestions={handleFetchedQuestions}
               setLoading={setLoading}
             />
           </div>
           {/* Show spinner while loading */}
-          {loading ? (
-            <div className="flex justify-center items-center min-h-[200px]">
-              <Spinner />
-            </div>
-          ) : (
-            <div className="order-1 min-[700px]:order-2">
+          <div className="order-1 min-[700px]:order-2">
+            {loading ? (
+              <div className="flex justify-center items-center min-h-[200px]">
+                <Spinner />
+              </div>
+            ) : (
               <div className="mt-5 gap-4 flex justify-center flex-col min-[700px]:flex-row items-center ">
                 <div className="order-2 min-[700px]:order-1">
                   {questions.length > 0 && currentIndex < questions.length && (
@@ -124,8 +126,8 @@ export default function Home() {
                   {questions.length > 0 && renderScoreDisplay()}
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </main>
       </div>
       <Footer />

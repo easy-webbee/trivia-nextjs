@@ -26,11 +26,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 interface Props {
+  quizStarted:boolean;
   onFetchedQuestions: (questions: Question[]) => void;
   setLoading: (loading: boolean) => void;
 }
 
-export default function TriviaForm({ onFetchedQuestions, setLoading }: Props) {
+export default function TriviaForm({ onFetchedQuestions, setLoading , quizStarted}: Props) {
   const [showWelcome, setShowWelcome] = useState(true);
 
   const [form, setForm] = useState({
@@ -122,7 +123,7 @@ export default function TriviaForm({ onFetchedQuestions, setLoading }: Props) {
       className="rounded w-[220px] font-medium"
       onClick={fetchTrivia}
     >
-      Start Travia
+      {quizStarted ? "Restart Quiz" : "Start Quiz"}
     </Button>
   );
   const desktopView = (
@@ -135,14 +136,14 @@ export default function TriviaForm({ onFetchedQuestions, setLoading }: Props) {
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="destructive" className="rounded w-[220px] font-medium">
-          Start Travia
+          {quizStarted ? "Restart Quiz" : "Start Quiz"}
         </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-destructive font-medium">
-            Start Trivia
+            Trivia
           </DialogTitle>
           <DialogDescription>
             Choose your trivia preferences before starting the game.
