@@ -1,4 +1,4 @@
-// Score.tsx
+"use client";
 import { Statistic } from "../model/trivia.model";
 import {
   Card,
@@ -8,6 +8,7 @@ import {
   CardContent,
   CardFooter,
 } from "./ui/card";
+import AnimatedNumbers from "react-animated-numbers";
 
 interface ScoreDisplayProps {
   score: number;
@@ -25,8 +26,23 @@ export function ScoreDisplay({ score, statitic }: ScoreDisplayProps) {
       </CardHeader>
 
       <CardContent className="flex-grow space-y-2 text-4xl font-bold text-center">
-        <div className="text-4xl font-bold">{score}</div>
-
+        <div className="flex justify-center">
+          <AnimatedNumbers
+            key={score}
+            includeComma
+            animateToNumber={score}
+            transitions={(index) => ({
+              type: "spring",
+              tension: 100 * (index + 1),
+              friction: 100,
+            })}
+            fontStyle={{
+              fontSize: 50,
+              fontWeight: "700",
+              color: "#16a34a",
+            }}
+          />
+        </div>
         <div className="mt-5 space-y-2 text-base">
           <p>
             <strong>Easy:</strong> {statitic.easy.correct} /{" "}

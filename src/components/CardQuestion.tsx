@@ -43,15 +43,18 @@ export function CardQuestion({
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [timeoutReached, setTimeoutReached] = useState(false);
   const [timer, setTimer] = useState(maxTime);
+  const [showPoints, setshowPoints] = useState(0);
+
+  // reset
   useEffect(() => {
     setSelectedAnswer(null);
     setTimeoutReached(false);
     setTimer(maxTime);
+    setshowPoints(0);
   }, [data, maxTime]);
 
   useEffect(() => {
     if (selectedAnswer || timeoutReached) return;
-
     const interval = setInterval(() => {
       setTimer((prev) => {
         if (prev === 1) {
@@ -71,6 +74,7 @@ export function CardQuestion({
       setSelectedAnswer(answer);
       const isCorrect = answer === correct_answer;
       const points = isCorrect ? 10 * timer : 0;
+      setshowPoints(points);
       onAnswer(points, difficulty);
     }
   };
@@ -109,6 +113,11 @@ export function CardQuestion({
             {timer === 0 && (
               <span className="text-red-500 font-bold text-sm whitespace-nowrap">
                 Time&apos;s up!
+              </span>
+            )}
+            {showPoints > 0 && (
+              <span className="text-green-600 font-semibold text-sm">
+                +{showPoints} pts
               </span>
             )}
             <CircularTimer timer={timer} maxTime={maxTime} />
