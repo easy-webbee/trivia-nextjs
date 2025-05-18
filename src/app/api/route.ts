@@ -22,7 +22,7 @@ export async function GET(req: Request) {
       success: true,
       data: questions.length > 0 ? questions : Mockdata,
     });
-  } catch (err: unknown) {
+  } catch {
     // return mock data incase api 429
     return NextResponse.json({ success: true, data: Mockdata });
   }

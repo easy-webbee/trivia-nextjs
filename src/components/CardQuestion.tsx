@@ -38,7 +38,7 @@ export function CardQuestion({
   const maxTime = difficultyTimerMap[difficulty] || 15;
   const allAnswers = useMemo(() => {
     return shuffleAnswers([correct_answer, ...incorrect_answers]);
-  }, [data]);
+  }, [correct_answer, incorrect_answers]);
 
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [timeoutReached, setTimeoutReached] = useState(false);
@@ -47,7 +47,7 @@ export function CardQuestion({
     setSelectedAnswer(null);
     setTimeoutReached(false);
     setTimer(maxTime);
-  }, [data]);
+  }, [maxTime]);
 
   useEffect(() => {
     if (selectedAnswer || timeoutReached) return;
@@ -64,7 +64,7 @@ export function CardQuestion({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [selectedAnswer, timeoutReached]);
+  }, [difficulty, onAnswer]);
 
   const handleSelect = (answer: string) => {
     if (!selectedAnswer && !timeoutReached) {
@@ -108,7 +108,7 @@ export function CardQuestion({
           <div className="flex items-center space-x-2">
             {timer === 0 && (
               <span className="text-red-500 font-bold text-sm whitespace-nowrap">
-                Time's up!
+                Time&apos;s up!
               </span>
             )}
             <CircularTimer timer={timer} maxTime={maxTime} />
