@@ -1,5 +1,5 @@
 // Score.tsx
-import { Statistic } from "./question.model";
+import { Statistic } from "../model/trivia.model";
 import {
   Card,
   CardHeader,

@@ -15,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Travia",
-  description: "Explore hundreds of trivia questions in categories like history, science, pop culture, and more. Pick your difficulty and test your knowledge today!",
+  description:
+    "Explore hundreds of trivia questions in categories like history, science, pop culture, and more. Pick your difficulty and test your knowledge today!",
 };
 
 export default function RootLayout({
@@ -25,19 +26,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-    <body
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-    >
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-
           {children}
         </ThemeProvider>
-    </body>
-  </html>
+      </body>
+    </html>
   );
 }

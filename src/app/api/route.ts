@@ -1,7 +1,6 @@
-// pages/api/fetch/route.ts (for App Router) or fetch.js (Pages Router)
 import { NextResponse } from "next/server";
 import axios from "axios";
-import { Mockdata } from "@/components/select-option";
+import { Mockdata } from "@/model/select-option";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);

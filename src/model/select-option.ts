@@ -39,8 +39,6 @@ export const triviaTypes = [
   { value: "boolean", label: "True / False" },
 ];
 
-// export const dataType = { triviaCategories, triviaDifficulties, triviaTypes };
-
 export const Mockdata = [
   {
     type: "multiple",

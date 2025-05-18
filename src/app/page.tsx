@@ -2,7 +2,7 @@
 import { Header } from "@/components/Header";
 import TriviaForm from "@/components/TriviaForm";
 import { useState } from "react";
-import { Difficulty, Question } from "@/components/question.model";
+import { Difficulty, Question } from "@/model/trivia.model";
 import { CardQuestion } from "@/components/CardQuestion";
 import { ScoreDisplay } from "@/components/Score";
 import Confetti from "react-confetti";
@@ -13,7 +13,6 @@ import { Spinner } from "@/components/spinner/Spinner";
 export default function Home() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { width, height } = useWindowSize();
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(false);
   const [statitic, setStatitic] = useState<
@@ -23,9 +22,9 @@ export default function Home() {
     medium: { correct: 0, total: 0 },
     hard: { correct: 0, total: 0 },
   });
+  const { width, height } = useWindowSize();
 
   const handleNext = (difficulty: Difficulty) => {
-    console.log(difficulty);
     setCurrentIndex((prev) => prev + 1);
     setStatitic((prev) => ({
       ...prev,
@@ -37,7 +36,6 @@ export default function Home() {
   };
 
   const handleAnswer = (points: number, difficulty: Difficulty) => {
-    console.log(difficulty);
     if (points > 0) {
       setStatitic((prev) => ({
         ...prev,
@@ -76,8 +74,8 @@ export default function Home() {
           />
           {loading ? (
             <div className="flex justify-center items-center min-h-[200px]">
-            <Spinner />
-          </div>
+              <Spinner />
+            </div>
           ) : (
             <div className="mt-5 gap-4 flex justify-center">
               <div>

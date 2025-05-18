@@ -8,7 +8,7 @@ import {
   CardContent,
   CardFooter,
 } from "./ui/card";
-import { Difficulty, Question } from "./question.model";
+import { Difficulty, Question } from "../model/trivia.model";
 import { CircularTimer } from "./ui/circularTimer";
 
 interface TriviaCardProps {

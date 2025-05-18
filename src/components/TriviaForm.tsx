@@ -9,12 +9,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Question, SelectOption } from "./question.model";
+import { Question, SelectOption } from "../model/trivia.model";
 import {
   triviaCategories,
   triviaDifficulties,
   triviaTypes,
-} from "./select-option";
+} from "../model/select-option";
 import { Button } from "./ui/button";
 
 interface Props {

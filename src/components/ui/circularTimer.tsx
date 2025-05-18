@@ -18,7 +18,6 @@ export const CircularTimer = ({ timer, maxTime }: CircularTimerProps) => {
   return (
     <div className="relative w-12 h-12">
       <svg height="100%" width="100%" viewBox="0 0 40 40">
-        {/* Background circle */}
         <circle
           stroke="#e5e7eb"
           fill="transparent"
@@ -27,7 +26,6 @@ export const CircularTimer = ({ timer, maxTime }: CircularTimerProps) => {
           cx="20"
           cy="20"
         />
-        {/* Progress or full red circle */}
         <circle
           stroke={showFullRed ? "#ef4444" : timer <= 5 ? "#ef4444" : "#3b82f6"}
           fill="transparent"
