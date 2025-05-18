@@ -1,5 +1,7 @@
 # Travia
 
+🌐 Live App: [https://thinktrivia.vercel.app](https://thinktrivia.vercel.app)
+
 Travia is an engaging trivia quiz web application that tests your knowledge across various categories and difficulty levels. Built with modern technologies like Next.js and shadcn/ui, it offers a fun, interactive way to challenge yourself and friends, and track your score.
 
 ---
