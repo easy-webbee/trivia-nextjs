@@ -31,18 +31,19 @@ export function CardQuestion({
     data;
 
   // time for difficulty lv
-  const difficultyTimerMap = {
+  const difficultyTimerMap: Record<Difficulty, number> = {
     easy: 15,
     medium: 30,
     hard: 45,
   };
-  const maxTime = difficultyTimerMap[difficulty] || 15;
+  
+  const maxTime = useMemo(() => difficultyTimerMap[difficulty] ?? 15, [difficulty]);
 
   // State variables for user answer selection, timeout, timer countdown, and points gained
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [timeoutReached, setTimeoutReached] = useState(false);
   const [timer, setTimer] = useState(maxTime);
-  const [showPoints, setshowPoints] = useState(0);
+  const [showPoints, setShowPoints] = useState(0);
 
   // Shuffle answers to randomize order each time question changes
   const allAnswers = useMemo(() => {
@@ -54,7 +55,7 @@ export function CardQuestion({
     setSelectedAnswer(null);
     setTimeoutReached(false);
     setTimer(maxTime);
-    setshowPoints(0);
+    setShowPoints(0);
   }, [data, maxTime]);
 
   // Timer countdown logic:
@@ -62,7 +63,7 @@ export function CardQuestion({
     if (selectedAnswer || timeoutReached) return;
     const interval = setInterval(() => {
       setTimer((prev) => {
-        if (prev === 1) {
+        if (prev <= 1) {
           clearInterval(interval);
           setTimeoutReached(true);
           onAnswer(0, difficulty);
@@ -80,7 +81,7 @@ export function CardQuestion({
       setSelectedAnswer(answer);
       const isCorrect = answer === correct_answer;
       const points = isCorrect ? 10 * timer : 0;
-      setshowPoints(points);
+      setShowPoints(points);
       onAnswer(points, difficulty);
     }
   };

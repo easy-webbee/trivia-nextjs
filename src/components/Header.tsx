@@ -1,7 +1,8 @@
-import { HomeIcon } from "lucide-react";
+import { HomeIcon, Quote } from "lucide-react";
 import Link from "next/link";
 import { NavButton } from "@/components/NavButton";
 import { ModeToggle } from "@/components/ModeToggle";
+import { QuizInfo } from "./QuizInfo";
 
 export function Header() {
   return (
@@ -20,6 +21,7 @@ export function Header() {
           </Link>
         </div>
         <div className="flex items-center">
+          <QuizInfo />
           <ModeToggle />
         </div>
       </div>
