@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Travia",
+  title: "Trivia",
   description:
     "Explore hundreds of trivia questions in categories like history, science, pop culture, and more. Pick your difficulty and test your knowledge today!",
 };

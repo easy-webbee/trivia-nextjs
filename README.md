@@ -1,8 +1,8 @@
-# 🧠 Travia – Think Fast, Score High
+# 🧠 Trivia – Think Fast, Score High
 
 🌐 **Live Demo**: [https://thinktrivia.vercel.app](https://thinktrivia.vercel.app)
 
-**Travia** is a modern trivia quiz web app that challenges your knowledge across a variety of topics and difficulty levels. Built with cutting-edge tools like **Next.js**, **shadcn/ui**, and **TypeScript**, Travia delivers an engaging and responsive experience with real-time feedback, scoring, and animations.
+**Trivia** is a modern trivia quiz web app that challenges your knowledge across a variety of topics and difficulty levels. Built with cutting-edge tools like **Next.js**, **shadcn/ui**, and **TypeScript**, Trivia delivers an engaging and responsive experience with real-time feedback, scoring, and animations.
 
 ---
 
@@ -34,7 +34,7 @@
 
 ## 📡 Trivia API
 
-Travia uses the [Open Trivia Database (OpenTDB)](https://opentdb.com/api_config.php) for fetching quiz data.
+Trivia uses the [Open Trivia Database (OpenTDB)](https://opentdb.com/api_config.php) for fetching quiz data.
 
 **Supported API Parameters:**
 
@@ -52,8 +52,8 @@ Travia uses the [Open Trivia Database (OpenTDB)](https://opentdb.com/api_config.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/travia.git
-cd travia
+git clone https://github.com/kuku20/trivia-nextjs
+cd Trivia
 ```
 
 ### 2. Install Dependencies
@@ -72,7 +72,7 @@ npm run dev
 yarn dev
 ```
 
-Then open [http://localhost:3000](http://localhost:3000) to explore Travia locally.
+Then open [http://localhost:3000](http://localhost:3000) to explore Trivia locally.
 
 ---
 

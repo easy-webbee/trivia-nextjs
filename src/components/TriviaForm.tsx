@@ -166,7 +166,7 @@ export default function TriviaForm({ onFetchedQuestions, setLoading , quizStarte
     <div className="flex flex-col items-center justify-center gap-6 text-center">
       {showWelcome && (
         <div className="flex flex-col items-center justify-center gap-6 text-center min-h-[200px]">
-          <h1 className="text-4xl font-bold">Welcome to Travia 🎉</h1>
+          <h1 className="text-4xl font-bold">Welcome to Trivia 🎉</h1>
           <p className="text-lg max-w-xl text-muted-foreground">
             Test your knowledge with fun trivia questions across various
             categories and difficulties. Ready to begin?
