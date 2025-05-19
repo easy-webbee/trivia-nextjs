@@ -20,7 +20,7 @@ export function QuizInfo() {
         </h3>
         <ul className="list-disc pl-5 space-y-1">
           <li>
-            <strong>Number of Questions:</strong> Set how many questions you'd
+            <strong>Number of Questions:</strong> Set how many questions you&apos;d
             like to answer (default is 10).
           </li>
           <li>

@@ -1,92 +1,94 @@
-# Travia
+# 🧠 Travia – Think Fast, Score High
 
-🌐 Live App: [https://thinktrivia.vercel.app](https://thinktrivia.vercel.app)
+🌐 **Live Demo**: [https://thinktrivia.vercel.app](https://thinktrivia.vercel.app)
 
-Travia is an engaging trivia quiz web application that tests your knowledge across various categories and difficulty levels. Built with modern technologies like Next.js and shadcn/ui, it offers a fun, interactive way to challenge yourself and friends, and track your score.
-
----
-
-## Features
-
-- Select number of questions, category, difficulty, and question type  
-- Real-time score tracking with detailed statistics by difficulty  
-- Animated circular timer with progress indicator and alerts  
-- Confetti celebration on quiz completion  
-- Responsive design optimized for desktop and mobile  
-- Accessible UI with ARIA labels and keyboard support  
-- Dark Mode  
+**Travia** is a modern trivia quiz web app that challenges your knowledge across a variety of topics and difficulty levels. Built with cutting-edge tools like **Next.js**, **shadcn/ui**, and **TypeScript**, Travia delivers an engaging and responsive experience with real-time feedback, scoring, and animations.
 
 ---
 
-## Technologies Used
+## 🚀 Features
 
-- **Next.js** — React framework for server-rendered apps  
-- **React** — UI library  
-- **TypeScript** — Static typing for JavaScript  
-- **shadcn/ui** — Component library for UI elements  
-- **react-confetti** — Celebration animation  
-- **react-use** — Utility hooks (e.g. window size)  
-- **lucide-react** — Lightweight React icon library  
-- **loading.io** — CSS spinner animations  
-
----
-
-## API Source
-
-This project uses the [Open Trivia Database (OpenTDB) API](https://opentdb.com/api_config.php) to fetch trivia questions. OpenTDB provides a free, public API for trivia questions across multiple categories and difficulties, making it perfect for quiz applications like Travia.
-
-The API endpoints used support parameters for:  
-- Number of questions  
-- Category  
-- Difficulty  
-- Question type  
-
-You can learn more and explore the API documentation here: [https://opentdb.com/api_config.php](https://opentdb.com/api_config.php)
+* 🎯 **Customizable Quiz Options**: Choose the number of questions, category, difficulty, and type (Multiple Choice or True/False).
+* 📊 **Dynamic Scoring System**: Earn points based on how quickly you answer. More difficult questions offer more time.
+* ⏱️ **Animated Timer**: Circular countdown timer with color-coded urgency and timeout handling.
+* 🎉 **Confetti Celebration**: Visual feedback when the quiz is completed.
+* 📱 **Fully Responsive**: Optimized for both mobile and desktop screens.
+* ♿ **Accessible UI**: Keyboard navigation and ARIA labels for an inclusive experience.
+* 🌙 **Dark Mode**: Seamless light/dark theme toggle.
 
 ---
 
-## Installation
+## 🛠️ Tech Stack
 
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/yourusername/travia.git
-   cd travia
-   ````
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-3. Run the development server:
-
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser to start using Travia.
+* **Next.js** – React-based framework for SSR and routing
+* **React + TypeScript** – Typed component logic
+* **shadcn/ui** – Elegant and accessible component library
+* **react-confetti** – Confetti animation on quiz completion
+* **react-use** – Helpful hooks (e.g., window size for confetti)
+* **lucide-react** – Lightweight and consistent icon set
+* **loading.io** – Stylish CSS-based loading animations
+* **react-confetti** – Confetti animation for quiz celebration
+* **...**
 
 ---
 
-## Future Improvements
+## 📡 Trivia API
 
-* **User Authentication:** Allow users to create accounts and log in to save their progress and scores.
-* **Score Persistence:** Store scores in a database for tracking user history and achievements.
-* **Multiplayer Competitions:** Implement real-time quiz rooms where multiple users can compete with the same set of questions.
-* **Leaderboard:** Add global and friends leaderboards to encourage competition and engagement.
-* **Question Review & Feedback:** Allow users to review past questions and submit feedback or new questions.
-* **Mobile App:** Create a mobile version of Travia for a better on-the-go experience.
+Travia uses the [Open Trivia Database (OpenTDB)](https://opentdb.com/api_config.php) for fetching quiz data.
+
+**Supported API Parameters:**
+
+* Number of questions
+* Category
+* Difficulty
+* Question type
+
+🔗 [Explore the API](https://opentdb.com/api_config.php)
 
 ---
 
-## Contributing
+## ⚙️ Getting Started
 
-Contributions are welcome! Please open issues or submit pull requests.
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/travia.git
+cd travia
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. Start the Development Server
+
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Then open [http://localhost:3000](http://localhost:3000) to explore Travia locally.
+
+---
+
+## 🌟 Planned Improvements
+
+* 🔐 **User Accounts** – Save progress, scores, and history across sessions
+* 📊 **Persistent Score Tracking** – Store and retrieve scores from a backend
+* 👥 **Multiplayer Mode** – Join live quiz rooms and compete in real time
+* 🏆 **Leaderboards** – See how you stack up against friends and global players
+* ✅ **Question Review** – Review past questions and submit ratings/feedback
+* 📱 **Mobile App Version** – Native experience via React Native or similar
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Feel free to open issues or submit pull requests to improve the app, add features, or fix bugs.
 
 ---

@@ -31,13 +31,13 @@ export function CardQuestion({
     data;
 
   // time for difficulty lv
-  const difficultyTimerMap: Record<Difficulty, number> = {
+  const difficultyTimerMap = {
     easy: 15,
     medium: 30,
     hard: 45,
   };
-  
-  const maxTime = useMemo(() => difficultyTimerMap[difficulty] ?? 15, [difficulty]);
+
+  const maxTime = difficultyTimerMap[difficulty] || 15;
 
   // State variables for user answer selection, timeout, timer countdown, and points gained
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
