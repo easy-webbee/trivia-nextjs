@@ -156,9 +156,7 @@ export default function TriviaForm({ onFetchedQuestions, setLoading , quizStarte
 
         <DialogFooter>
           <DialogClose asChild>
-            <div className="flex flex-wrap gap-4 justify-center">
               {btnStart}
-            </div>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
