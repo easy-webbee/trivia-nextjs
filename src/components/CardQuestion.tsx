@@ -111,8 +111,10 @@ export function CardQuestion({
           Category: {decode(category)} | Level {difficulty} | Time Allow{" "}
           {maxTime}s
         </CardTitle>
-
-        <CardDescription>{decode(question)}</CardDescription>
+        <hr />
+        <CardDescription className="font-bold">
+          {decode(question)}
+        </CardDescription>
         <div className="flex items-center justify-end space-x-2 w-full">
           <div className="flex items-center space-x-2">
             {timer === 0 && (
